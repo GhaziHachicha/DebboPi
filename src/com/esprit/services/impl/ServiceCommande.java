@@ -29,14 +29,9 @@ public class ServiceCommande {
              cnx=DataSource.getInstance().getConnection();}
     
       public void addCommande(Commande c) throws SQLException{
-         String ch="";
-         Produit p[]=c.getListProduit();
-         for(int i=0;i<c.getNbrProduit();i++)
-         {
-             ch=ch+p[i].getId_produit()+"-";
-         }
+        
           String req="INSERT INTO `commande`(list_produit,total,type_paiement,date_commande,date_exp,id_client) "
-                  + "VALUES('"+ch+"','"+c.getMontant()+"','"+c.getType_paiement()+"','"+getDate((Date)c.getDateCommande())+"','"+getDate((Date)c.getDateExp())+"','"+c.getIdClient()+"')";
+                  + "VALUES('"+c.getListProduit()+"','"+c.getMontant()+"','"+c.getType_paiement()+"','"+getDate((Date)c.getDateCommande())+"','"+getDate((Date)c.getDateExp())+"','"+c.getIdClient()+"')";
       PreparedStatement pst = cnx.prepareStatement(req);
       pst.executeUpdate(req);
     }
@@ -54,43 +49,15 @@ public class ServiceCommande {
           c.setDateExp(rst.getDate("date_exp"));
           c.setMontant(rst.getFloat("total"));
           c.setIdClient(rst.getInt("id_client"));
-          String produit=rst.getString("list_produit");
-          Produit list[];
-          try{
-          list = new Produit[100]; 
-          String co="",num="0123456789"; 
-          int k=0; Produit
-           pr;int l=0;
-          for(int i=0;i<produit.length();i++)
-          { if(produit.charAt(i)!='-')
-          {co=co+produit.charAt(i);k=0;}
-            else
-          {   for(int j=0;j<co.length();j++)
-            { k=(k*10)+num.indexOf(co.charAt(j));
-            }
-            pr=new Produit(k);
-              list[l]=pr; 
-              l++;
-          }
-          }
-          c.setListProduit(list);
-          commandes.add(c);
-          }catch(ArrayIndexOutOfBoundsException e){
-              System.out.println("erreur");
-          }
-      }
+          c.setListProduit(rst.getString("list_produit"));
           
+      }
+        
       return commandes;
           }
 
     public void updateCommande(Commande c) throws SQLException {
-         String ch="";
-         Produit p[]=c.getListProduit();
-         for(int i=0;i<c.getNbrProduit();i++)
-         {
-             ch=ch+p[i].getId_produit()+"-";
-         }
-        String req="UPDATE `commande` SET `list_produi`='"+ch+"',`type_paiement`='"+c.getType_paiement()+"',`date_commande`='" +getDate((Date)c.getDateCommande())+"',`date_exp`='"+getDate((Date)c.getDateExp())+"',`total`="+c.getMontant()+" where `id_commande`="+c.getIdCommande();
+                String req="UPDATE `commande` SET `list_produi`='"+c.getListProduit()+"',`type_paiement`='"+c.getType_paiement()+"',`date_commande`='" +getDate((Date)c.getDateCommande())+"',`date_exp`='"+getDate((Date)c.getDateExp())+"',`total`="+c.getMontant()+" where `id_commande`="+c.getIdCommande();
         PreparedStatement pst = cnx.prepareStatement(req);
         pst.executeUpdate(req);
     }

@@ -38,7 +38,7 @@ public class ServicePanier {
       PreparedStatement pst = cnx.prepareStatement(req);
         ResultSet rst= pst.executeQuery(req);
         List<Panier> paniers =  new ArrayList<>();
-      Panier p= new Panier();
+     /* Panier p= new Panier();
       while(rst.next())
       {   p.setId_panier(rst.getInt("id_panier"));
           String etat=rst.getString("etat_panier");
@@ -69,20 +69,13 @@ public class ServicePanier {
               System.out.println("erreur");
           }
       }
-          
+          */
       return paniers;
     }
     public void updatePannier(Panier p) throws SQLException{
-        String ch="";
-         Produit produits[]=p.getListProduit();
-         int nbr=0;
-         while(produits[nbr]!=null)
-         {  nbr++;}
-         for(int i=0;i<nbr;i++)
-         {
-             ch=ch+produits[i].getId_produit()+"-";
-         }
-          String req="UPDATE `panier` SET `list_produit`='"+ch+"',`nbr_produit`='"+p.getNbrProduit()+"',`etat_panier`='"+p.getEtatPanier()+"' where `id_panier`="+p.getId_panier();
+        
+       
+          String req="UPDATE `panier` SET `list_produit`='"+p.getListProduit()+"',`nbr_produit`='"+p.getNbrProduit()+"',`etat_panier`='"+p.getEtatPanier()+"' where `id_panier`="+p.getId_panier();
       PreparedStatement pst = cnx.prepareStatement(req);
       pst.executeUpdate(req);
     }
@@ -90,5 +83,17 @@ public class ServicePanier {
          String req="DELETE FROM `panier` where `id_panier`="+p.getId_panier();
       PreparedStatement pst = cnx.prepareStatement(req);
       pst.executeUpdate(req);
+    }
+        public Panier getPannier(int id_client) throws SQLException{
+         String req="SELECT * FROM `panier` where `id_client`="+id_client;
+      PreparedStatement pst = cnx.prepareStatement(req);
+      ResultSet rst=pst.executeQuery(req);
+      Panier p=null;
+      while(rst.next())
+      {
+          
+          p = new Panier(rst.getInt(1),id_client , rst.getString(2),rst.getInt(3) , rst.getString(4).charAt(0));
+      }
+      return p;
     }
 }

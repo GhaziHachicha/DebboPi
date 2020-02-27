@@ -16,7 +16,7 @@ public class Commande {
     private int idCommande;
     private Date dateCommande;
     private Date dateExp;
-    private Produit [] listProduit;
+    private String listProduit;
     private float montant;
     private String Type_paiement;
     private int idClient;
@@ -25,31 +25,28 @@ public class Commande {
     
     public Commande(){};
 
-    public Commande(int idCommande, Date dateCommande, Date dateExp, float montant, String Type_paiement, int idClient) {
-        this.idCommande = idCommande;
-        this.dateCommande = dateCommande;
-        this.dateExp = dateExp;
-        this.montant = montant;
-        this.Type_paiement = Type_paiement;
-        this.idClient = idClient;
-        listProduit = new Produit[1000];
-        nbrProduit =0;
-    }
-    
-    
-
-    public Commande( Date dateCommande, Date dateExp, Produit[] listProduit, float montant, String Type_paiement, int idClient) {
-        
-        while(listProduit[nbrProduit]!=null)
-        {nbrProduit++ ;}
+    public Commande(Date dateCommande, Date dateExp, String listProduit, float montant, String Type_paiement, int idClient, int nbrProduit) {
         this.dateCommande = dateCommande;
         this.dateExp = dateExp;
         this.listProduit = listProduit;
         this.montant = montant;
         this.Type_paiement = Type_paiement;
         this.idClient = idClient;
+        this.nbrProduit = nbrProduit;
+    }
+    
+    public Commande(int idCommande, Date dateCommande, Date dateExp, String listProduit, float montant, String Type_paiement, int idClient, int nbrProduit) {
+        this.idCommande = idCommande;
+        this.dateCommande = dateCommande;
+        this.dateExp = dateExp;
+        this.listProduit = listProduit;
+        this.montant = montant;
+        this.Type_paiement = Type_paiement;
+        this.idClient = idClient;
+        this.nbrProduit = nbrProduit;
     }
 
+ 
     public int getIdCommande() {
         return idCommande;
     }
@@ -74,11 +71,11 @@ public class Commande {
         this.dateExp = dateExp;
     }
 
-    public Produit[] getListProduit() {
+    public String getListProduit() {
         return listProduit;
     }
 
-    public void setListProduit(Produit[] listProduit) {
+    public void setListProduit(String listProduit) {
         this.listProduit = listProduit;
     }
 

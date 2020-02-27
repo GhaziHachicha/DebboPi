@@ -11,9 +11,8 @@ package com.esprit.entities;
  */
 public class Panier {
     private int id_panier;
-    private int id_panier1;
     private int id_client;
-    private Produit listProduit[];
+    private String listProduit;
     private int nbrProduit;
     private char EtatPanier;
     
@@ -23,7 +22,7 @@ public class Panier {
 
     public Panier(int id_client, char EtatPanier) {
         this.id_client = id_client;
-        this.listProduit = new Produit[100];
+        this.listProduit = "";
         this.nbrProduit = 0;
         this.EtatPanier = EtatPanier;
     }
@@ -31,25 +30,27 @@ public class Panier {
     public Panier(int id_panier, int id_client, int nbrProduit, char EtatPanier) {
         this.id_panier = id_panier;
         this.id_client = id_client;
-        this.listProduit = new Produit[100];
+        this.listProduit = "";
         this.nbrProduit = nbrProduit;
         this.EtatPanier = EtatPanier;
     }
-
-    public Panier(int id_panier, int id_client, Produit[] listProduit, int nbrProduit, char EtatPanier) {
+    
+    public Panier(int id_panier, int id_client, String listProduit, int nbrProduit, char EtatPanier) {
         this.id_panier = id_panier;
         this.id_client = id_client;
         this.listProduit = listProduit;
         this.nbrProduit = nbrProduit;
         this.EtatPanier = EtatPanier;
     }
-    
-    
-    
-    public void addProduit(Produit p)
-    {   listProduit[nbrProduit]=p;
-        nbrProduit++;
+
+    public Panier(int id_panier, String listProduit, int nbrProduit, char EtatPanier) {
+        this.id_panier = id_panier;
+        this.listProduit = listProduit;
+        this.nbrProduit = nbrProduit;
+        this.EtatPanier = EtatPanier;
     }
+    
+    
 
     public int getId_panier() {
         return id_panier;
@@ -67,11 +68,11 @@ public class Panier {
         this.id_client = id_client;
     }
 
-    public Produit[] getListProduit() {
+    public String getListProduit() {
         return listProduit;
     }
 
-    public void setListProduit(Produit[] listProduit) {
+    public void setListProduit(String listProduit) {
         this.listProduit = listProduit;
     }
 
