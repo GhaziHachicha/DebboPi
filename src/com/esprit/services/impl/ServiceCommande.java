@@ -30,8 +30,8 @@ public class ServiceCommande {
     
       public void addCommande(Commande c) throws SQLException{
         
-          String req="INSERT INTO `commande`(list_produit,total,type_paiement,date_commande,date_exp,id_client) "
-                  + "VALUES('"+c.getListProduit()+"','"+c.getMontant()+"','"+c.getType_paiement()+"','"+getDate((Date)c.getDateCommande())+"','"+getDate((Date)c.getDateExp())+"','"+c.getIdClient()+"')";
+          String req="INSERT INTO `commande`(total,type_paiement,date_commande,date_exp,id_client) "
+                  + "VALUES('"+c.getMontant()+"','"+c.getType_paiement()+"','"+getDate((Date)c.getDateCommande())+"','"+getDate((Date)c.getDateExp())+"','"+c.getIdClient()+"')";
       PreparedStatement pst = cnx.prepareStatement(req);
       pst.executeUpdate(req);
     }
@@ -49,7 +49,6 @@ public class ServiceCommande {
           c.setDateExp(rst.getDate("date_exp"));
           c.setMontant(rst.getFloat("total"));
           c.setIdClient(rst.getInt("id_client"));
-          c.setListProduit(rst.getString("list_produit"));
           
       }
         
@@ -57,7 +56,7 @@ public class ServiceCommande {
           }
 
     public void updateCommande(Commande c) throws SQLException {
-                String req="UPDATE `commande` SET `list_produi`='"+c.getListProduit()+"',`type_paiement`='"+c.getType_paiement()+"',`date_commande`='" +getDate((Date)c.getDateCommande())+"',`date_exp`='"+getDate((Date)c.getDateExp())+"',`total`="+c.getMontant()+" where `id_commande`="+c.getIdCommande();
+                String req="UPDATE `commande` SET `type_paiement`='"+c.getType_paiement()+"',`date_commande`='" +getDate((Date)c.getDateCommande())+"',`date_exp`='"+getDate((Date)c.getDateExp())+"',`total`="+c.getMontant()+" where `id_commande`="+c.getIdCommande();
         PreparedStatement pst = cnx.prepareStatement(req);
         pst.executeUpdate(req);
     }

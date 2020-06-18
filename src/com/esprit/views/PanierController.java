@@ -10,6 +10,7 @@ import com.esprit.entities.ListPanier;
 import com.esprit.entities.Panier;
 import com.esprit.services.impl.ServiceCommande;
 import com.esprit.services.impl.ServicePanier;
+import com.esprit.services.impl.ServiceProduitPanier;
 import com.esprit.utilities.DataSource;
 import java.awt.Color;
 import java.io.IOException;
@@ -125,7 +126,9 @@ public class PanierController implements Initializable {
         Panier p=sp.getPannier(1);
         Date d= new Date(LocalDate.now().getYear(), LocalDate.now().getMonthValue(), LocalDate.now().getDayOfMonth());
         Date dexp= new Date(LocalDate.now().plusDays(30).getYear(), LocalDate.now().plusDays(30).getMonthValue(), LocalDate.now().plusDays(30).getDayOfMonth());
-        Commande c=new Commande(d,dexp, p.getListProduit(),Float.parseFloat(BoxTotal.getText()) , "carte", p.getId_client(),p.getNbrProduit());
+        Commande c=new Commande(d,dexp,Float.parseFloat(BoxTotal.getText()) , "carte", p.getId_client());
+        ServiceProduitPanier pp= new ServiceProduitPanier();
+        
        sc.addCommande(c);
        p.setEtatPanier('v');
        p.setListProduit("");

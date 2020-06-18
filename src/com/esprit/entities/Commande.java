@@ -16,34 +16,28 @@ public class Commande {
     private int idCommande;
     private Date dateCommande;
     private Date dateExp;
-    private String listProduit;
     private float montant;
     private String Type_paiement;
     private int idClient;
-    private int nbrProduit;
     
     
     public Commande(){};
 
-    public Commande(Date dateCommande, Date dateExp, String listProduit, float montant, String Type_paiement, int idClient, int nbrProduit) {
+    public Commande(Date dateCommande, Date dateExp, float montant, String Type_paiement, int idClient) {
         this.dateCommande = dateCommande;
         this.dateExp = dateExp;
-        this.listProduit = listProduit;
         this.montant = montant;
         this.Type_paiement = Type_paiement;
         this.idClient = idClient;
-        this.nbrProduit = nbrProduit;
     }
     
-    public Commande(int idCommande, Date dateCommande, Date dateExp, String listProduit, float montant, String Type_paiement, int idClient, int nbrProduit) {
+    public Commande(int idCommande, Date dateCommande, Date dateExp,  float montant, String Type_paiement, int idClient) {
         this.idCommande = idCommande;
         this.dateCommande = dateCommande;
         this.dateExp = dateExp;
-        this.listProduit = listProduit;
         this.montant = montant;
         this.Type_paiement = Type_paiement;
         this.idClient = idClient;
-        this.nbrProduit = nbrProduit;
     }
 
  
@@ -71,14 +65,7 @@ public class Commande {
         this.dateExp = dateExp;
     }
 
-    public String getListProduit() {
-        return listProduit;
-    }
-
-    public void setListProduit(String listProduit) {
-        this.listProduit = listProduit;
-    }
-
+   
     public float getMontant() {
         return montant;
     }
@@ -103,14 +90,7 @@ public class Commande {
         this.idClient = idClient;
     }
 
-    public int getNbrProduit() {
-        return nbrProduit;
-    }
-
-    public void setNbrProduit(int nbrPrdouit) {
-        this.nbrProduit = nbrPrdouit;
-    }
-   
+  
     
     
     
